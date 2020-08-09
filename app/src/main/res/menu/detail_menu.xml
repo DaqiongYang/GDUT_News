@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/open_in_browser"
+        android:title="在浏览器中打开（需要登录）"/>
+
+    <item
+        android:id="@+id/copyToClipboard"
+        android:title="复制链接到剪贴板"/>
+</menu>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <Button
+        android:id="@+id/xntz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="校内通知" />
+
+    <Button
+        android:id="@+id/gsgg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="公示公告" />
+
+    <Button
+        android:id="@+id/xnjx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="校内简讯" />
+
+    <Button
+        android:id="@+id/zbgg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="招标公告" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchButton"
+        android:text="搜索"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gotoButton"
+        android:text="跳转连接"/>
+
+</LinearLayout>
