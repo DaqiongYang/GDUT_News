@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/newsListFrag"
-        android:name="com.example.gdutnews.NewsListFrag"
+        android:name="com.example.gdutnews.ui.list.NewsListFrag"
         tools:layout="@layout/news_list_frag" />
 
 

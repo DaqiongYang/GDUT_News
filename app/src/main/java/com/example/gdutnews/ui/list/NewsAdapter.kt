@@ -1,4 +1,4 @@
-package com.example.gdutnews
+package com.example.gdutnews.ui.list
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gdutnews.ui.detail.NewsDetailActivity
+import com.example.gdutnews.R
+import com.example.gdutnews.logic.model.NewsInfo
 
 class NewsAdapter(val newsList: List<NewsInfo>) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>(){

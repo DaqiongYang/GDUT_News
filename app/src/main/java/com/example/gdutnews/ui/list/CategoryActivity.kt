@@ -1,19 +1,19 @@
-package com.example.gdutnews
+package com.example.gdutnews.ui.list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.MenuItem
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import httpUtil.HttpUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import com.example.gdutnews.R
 import kotlinx.android.synthetic.main.activity_category.*
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
 
 
 class CategoryActivity : AppCompatActivity() {
+
+    private val viewModel by lazy { ViewModelProvider(this).get(CategoryViewModel::class.java) }
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,29 +28,22 @@ class CategoryActivity : AppCompatActivity() {
             8 -> supportActionBar?.title = "招标公告"
             else -> supportActionBar?.title = "错误"
         }
-        val category = intent.getIntExtra("categoryID", 0)
-        HttpUtil.httpRequest("http://news.gdut.edu.cn/ArticleList.aspx?category=$category",
-            Session.SessionID, object :
-                Callback {
-                override fun onResponse(call: Call, response: Response) {
-                    val content = response.body?.string()
-                    runOnUiThread {
-                        val frag = newsListFrag as NewsListFrag
-                        content?.let {
-                            frag.init(category, content, null)
-                        }
-                    }
-                }
 
-                override fun onFailure(call: Call, e: IOException) {
-                    e.printStackTrace()
-                }
-            })
+        val category = intent.getIntExtra("categoryID", 0)
+
+        viewModel.itemLiveData.observe(this) { result ->
+            val content = result.getOrNull()
+            val frag = newsListFrag as NewsListFrag
+            if (content != null) {
+                frag.init(category, content, null)
+            }
+        }
+            viewModel.getItems(category.toString())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home ->   {
+        when (item.itemId) {
+            android.R.id.home -> {
                 finish()
             }
         }
