@@ -3,8 +3,9 @@ package com.example.gdutnews.util
 import org.jsoup.Jsoup
 
 object HiddenInputHelper {
+
     // 获取隐藏域
-    fun getHiddenInfo(data: String): HiddenInput{
+    fun getHiddenInfo(data: String): HiddenInput {
         val doc = Jsoup.parse(data)
         val selects = doc.select("input[type=hidden]")
         val element1 = selects[0]

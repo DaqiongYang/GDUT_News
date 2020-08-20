@@ -1,160 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/searchLayout"
-        android:padding="5dp">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp">
 
         <LinearLayout
+            android:id="@+id/searchLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="关键字："/>
+                android:orientation="horizontal">
 
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="3"
-                android:id="@+id/searchText"
-                android:maxLines="1" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="关键字：" />
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/searchText"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="3"
+                    android:maxLines="1" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="搜索类型："
-                android:layout_gravity="center"/>
+                android:orientation="horizontal">
 
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="3"
-                android:id="@+id/typeSpinner"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="搜索类型：" />
 
-        </LinearLayout>
+                <Spinner
+                    android:id="@+id/typeSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="3" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="文章所属部门:"
-                android:layout_weight="1"/>
+                android:orientation="horizontal">
 
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="3"
-                android:id="@+id/departmentSpinner"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="文章所属部门:" />
 
-        </LinearLayout>
+                <Spinner
+                    android:id="@+id/departmentSpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="3" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="文章分类:"
-                android:layout_weight="1"/>
+                android:orientation="horizontal">
 
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="3"
-                android:id="@+id/categorySpinner"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="文章分类:" />
 
-        </LinearLayout>
+                <Spinner
+                    android:id="@+id/categorySpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="3" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="开始日期："
-                android:layout_gravity="center"
-                android:layout_weight="1"/>
+                android:orientation="horizontal">
 
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="45dp"
-                android:maxLines="1"
-                android:hint="如“2020-01-01 00:00:00”"
-                android:id="@+id/startDate"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="开始日期：" />
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/startDate"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="3"
+                    android:hint="如“2020-01-01 00:00:00”"
+                    android:maxLines="1" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="结束日期："
-                android:layout_gravity="center"
-                android:layout_weight="1"/>
+                android:orientation="horizontal">
 
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="45dp"
-                android:maxLines="1"
-                android:hint="如“2020-05-01 00:00:00”"
-                android:id="@+id/endDate" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="结束日期：" />
+
+                <EditText
+                    android:id="@+id/endDate"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="3"
+                    android:hint="如“2020-05-01 00:00:00”"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/search_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="搜索" />
+
+                <Button
+                    android:id="@+id/showOptInPanel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="隐藏搜索面板"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
         <Button
+            android:id="@+id/showOptBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="搜索"
-            android:id="@+id/search_button"/>
+            android:text="展开搜索面板"
+            android:visibility="gone" />
+
+        <fragment
+            android:id="@+id/resultListFrag"
+            android:name="com.example.gdutnews.ui.list.NewsListFrag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/news_list_frag" />
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="展开搜索面板"
-        android:id="@+id/showOptBtn"
-        android:visibility="gone"/>
-
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/resultListFrag"
-        android:name="com.example.gdutnews.ui.list.NewsListFrag"
-        tools:layout="@layout/news_list_frag" />
-
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

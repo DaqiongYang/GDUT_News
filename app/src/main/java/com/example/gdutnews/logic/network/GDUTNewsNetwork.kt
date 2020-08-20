@@ -1,6 +1,5 @@
 package com.example.gdutnews.logic.network
 
-import android.util.Log
 import okhttp3.Call
 import okhttp3.FormBody
 import okhttp3.Response

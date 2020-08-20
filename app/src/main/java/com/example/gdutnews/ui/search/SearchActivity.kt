@@ -1,9 +1,12 @@
 package com.example.gdutnews.ui.search
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.inputmethodservice.InputMethodService
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
@@ -24,6 +27,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // 初始化下拉栏
@@ -250,13 +254,23 @@ class SearchActivity : AppCompatActivity() {
                 searchLayout.visibility = View.GONE
                 showOptBtn.visibility = View.VISIBLE
             }
+            val manager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            manager.hideSoftInputFromWindow(searchLayout.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
             getResult()
         }
 
         showOptBtn.setOnClickListener {
             if (searchLayout.visibility != View.VISIBLE) {
                 searchLayout.visibility = View.VISIBLE
+                showOptInPanel.visibility = View.VISIBLE
                 showOptBtn.visibility = View.GONE
+            }
+        }
+
+        showOptInPanel.setOnClickListener {
+            if (searchLayout.visibility != View.GONE) {
+                searchLayout.visibility = View.GONE
+                showOptBtn.visibility = View.VISIBLE
             }
         }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/xnztItem"
+            android:title="校内通知" />
+        <item
+            android:id="@+id/gsggItem"
+            android:title="公示公告" />
+        <item
+            android:id="@+id/xnjxItem"
+            android:title="校内简讯" />
+        <item
+            android:id="@+id/zbggItem"
+            android:title="招标公告" />
+    </group>
+</menu>

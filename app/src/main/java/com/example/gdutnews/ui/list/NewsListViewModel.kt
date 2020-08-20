@@ -31,11 +31,11 @@ class NewsListViewModel : ViewModel() {
     private val searchLiveData = MutableLiveData<FormBody>()
 
     val result = Transformations.switchMap(getPageLiveData) {
-        Repository.getNextPage(categoryID, getPageLiveData.value)
+        Repository.getCategoryPage(categoryID, getPageLiveData.value)
     }
 
     val searchResult = Transformations.switchMap(searchLiveData) {
-        Repository.getNextPage(categoryID, searchLiveData.value, address)
+        Repository.getCategoryPage(categoryID, searchLiveData.value, address)
     }
 
     fun getPage(formBody: FormBody) {

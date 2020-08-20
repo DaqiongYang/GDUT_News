@@ -1,17 +1,15 @@
 package com.example.gdutnews.logic
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.example.gdutnews.GDUTNewsApplication
 import com.example.gdutnews.logic.network.GDUTNewsNetwork
+import com.example.gdutnews.util.HiddenInputHelper
 import kotlinx.coroutines.Dispatchers
 import okhttp3.FormBody
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
-import kotlin.Exception
 import kotlin.coroutines.CoroutineContext
 
 object Repository {
@@ -24,12 +22,13 @@ object Repository {
         GDUTNewsApplication.session = sessionID
         // 获取隐藏域
         val data = responseFirst.body?.string()
-        val parse: Document = Jsoup.parse(data)
-        val selects: Elements = parse.select("input[type=hidden]")
-        val element1: Element = selects[0]
-        val __VIEWSTATE: String = element1.attr("value")
-        val element2: Element = selects[1]
-        val __EVENTVALIDATION: String = element2.attr("value")
+        val hidden = data?.let { HiddenInputHelper.getHiddenInfo(it) }
+        var __EVENTVALIDATION= ""
+        var __VIEWSTATE = ""
+        if (hidden != null ){
+            __VIEWSTATE = hidden.__VIEWSTATE
+            __EVENTVALIDATION = hidden.__EVENTVALIDATION
+        }
         // 模拟登录
         val formBody = FormBody.Builder()
             .add("__VIEWSTATE", __VIEWSTATE)
@@ -47,7 +46,7 @@ object Repository {
         Result.success(sessionID)
     }
 
-    fun getNextPage(category: String, formBody: FormBody? = null, searchAddress: String? = null) =
+    fun getCategoryPage(category: String, formBody: FormBody? = null, searchAddress: String? = null) =
         fire(Dispatchers.IO) {
             var response: String? = null
             if (formBody != null) {

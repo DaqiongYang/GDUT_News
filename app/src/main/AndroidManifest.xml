@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.gdutnews">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,30 +16,20 @@
         <activity
             android:name=".ui.misc.GotoActivity"
             android:label="跳转连接"
-            android:screenOrientation="portrait"
             android:theme="@style/GotoTheme" />
         <activity
             android:name=".ui.search.SearchActivity"
-            android:label="搜索"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.detail.NewsDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.list.CategoryActivity"
-            android:screenOrientation="portrait" />
+            android:label="搜索" />
+        <activity android:name=".ui.detail.NewsDetailActivity" />
         <activity
             android:name=".ui.misc.SplashActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.main.MainActivity" />
     </application>
 
 </manifest>

@@ -7,6 +7,8 @@ import android.os.AsyncTask
 import android.widget.Toast
 import com.example.gdutnews.GDUTNewsApplication
 
+// 剪贴板读写辅助类
+
 object Clipboard {
 
     private val cm =

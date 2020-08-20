@@ -1,61 +1,75 @@
 package com.example.gdutnews.ui.main
 
-import android.annotation.SuppressLint
-import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gdutnews.*
+import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import com.example.gdutnews.GDUTNewsApplication
+import com.example.gdutnews.R
 import com.example.gdutnews.ui.detail.NewsDetailActivity
+import com.example.gdutnews.ui.list.NewsListFrag
 import com.example.gdutnews.ui.misc.GotoActivity
-import com.example.gdutnews.ui.list.CategoryActivity
 import com.example.gdutnews.ui.search.SearchActivity
 import com.example.gdutnews.util.Clipboard
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
-    @SuppressLint("ResourceAsColor")
+    private val viewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        xntz.setOnClickListener {
-            getInfo(4)
+        val frag = newsList as NewsListFrag
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.drawable.ic_menu)
         }
-        gsgg.setOnClickListener {
-            getInfo(5)
+        viewModel.selectedItem = 4
+
+        navView.setCheckedItem(R.id.xnztItem)
+        navView.setNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.xnztItem -> viewModel.selectedItem = 4
+                R.id.gsggItem -> viewModel.selectedItem = 5
+                R.id.xnjxItem -> viewModel.selectedItem = 6
+                R.id.zbggItem -> viewModel.selectedItem = 8
+            }
+            drawerLayout.closeDrawers()
+            progressBar.visibility = View.VISIBLE
+            viewModel.getItems(viewModel.selectedItem.toString())
+            true
         }
-        xnjx.setOnClickListener {
-            getInfo(6)
+
+        progressBar.visibility = View.VISIBLE
+
+        viewModel.itemLiveData.observe(this) { result ->
+            val content = result.getOrNull()
+            if (content != null) {
+                frag.init(viewModel.selectedItem, content, null)
+            }
+            progressBar.visibility = View.GONE
+            when (viewModel.selectedItem) {
+                4 -> supportActionBar?.title = "校内通知"
+                5 -> supportActionBar?.title = "公示公告"
+                6 -> supportActionBar?.title = "校内简讯"
+                8 -> supportActionBar?.title = "招标公告"
+            }
         }
-        zbgg.setOnClickListener {
-            getInfo(8)
-        }
-        searchButton.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
-        }
-        gotoButton.setOnClickListener {
-            val intent = Intent(this, GotoActivity::class.java)
-            startActivity(intent)
-        }
+
+        viewModel.getItems(viewModel.selectedItem.toString())
     }
 
-    private fun getInfo(category: Int) {
-        if (GDUTNewsApplication.session != "") {
-            val intent = Intent(this@MainActivity, CategoryActivity::class.java)
-            intent.putExtra("categoryID", category)
-            startActivity(intent)
-            GDUTNewsApplication.notToOpen = true
-        }
-    }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         // 在获取焦点时读取剪贴板文字
@@ -103,6 +117,26 @@ class MainActivity : AppCompatActivity() {
                 show()
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> drawerLayout.openDrawer(GravityCompat.START)
+            R.id.searchItem -> {
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.gotoItem -> {
+                val intent = Intent(this, GotoActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 
 }
